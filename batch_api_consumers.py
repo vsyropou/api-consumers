@@ -11,7 +11,7 @@ import threading
 import time
 import abc
 
-__all__ = ['BatchVideoDowloader', 'BatchTextTagsClasifier']
+__all__ = ['BatchVideoDowloader'] #, 'BatchTextTagsClasifier']
 
 
 class AbsBatchConsumer(abc.ABC):

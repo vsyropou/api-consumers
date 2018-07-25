@@ -12,7 +12,7 @@ import json
 import os
 import sys
 
-__all__ = ['VideoCacheManager', 'TextClassificationCacheManager']
+__all__ = ['KeyValuePairCachedObject', 'VideoCacheManager']
 
 class BaseCacheManager():
     def __init__(self, path=None):
@@ -61,10 +61,20 @@ class BaseCacheManager():
             out_file.write(serialized_cahe)
 
 
+class VideoCacheManager(BaseCacheManager):
+    def __init__(self, *args,**kwargs):
+        
+        super(VideoCacheManager,self).__init__(*args,**kwargs)
+
+        if not self._file_path:
+            self._file_path = './__video_urls_cache__.json'
+            warn('Using defalut cache path for subtitle files, "%s" '%self._file_path)
+
+
 class KeyValuePairCachedObject():
     
     def __init__(self, value, value_getter_func, cache, **kwargs):
-        
+
         self._getter_proxy = value_getter_func
         self._cache = cache
         self._value = value
@@ -116,25 +126,4 @@ class KeyValuePairCachedObject():
     @property
     def value(self):
         return self._value
-
-
-class VideoCacheManager(BaseCacheManager):
-    def __init__(self, *args,**kwargs):
-        
-        super(VideoCacheManager,self).__init__(*args,**kwargs)
-
-        if not self._file_path:
-            self._file_path = './__video_urls_cache__.json'
-            warn('Using defalut cache path for subtitle files, "%s" '%self._file_path)
-
-
-class TextClassificationCacheManager(BaseCacheManager):
-    def __init__(self, *args,**kwargs):
-        
-        super(TextClassificationCacheManager,self).__init__(*args,**kwargs)
-
-        if not self._file_path:
-            self._file_path = './__text_calssification_cache__.json'
-            warn('Using defalut cache path for subtitle files, "%s" '%self._file_path)
-
 

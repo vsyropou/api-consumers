@@ -1,3 +1,4 @@
+# This code was not written by me it was copied an modified from the google online documentation.
 
 from google.cloud import language, videointelligence
 from google.cloud.language import enums
